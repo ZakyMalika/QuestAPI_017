@@ -9,7 +9,9 @@ lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.12.1"
 composeBom = "2024.09.00"
 #
-serialization = "1.7.3" retrofit-serialization = "1.0.0" okhttp = "4.12.0”
+serialization = "1.7.3"
+retrofit-serialization = "1.0.0"
+okhttp = "4.12.0"
 
 
 [libraries]
@@ -41,5 +43,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 #
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
 
