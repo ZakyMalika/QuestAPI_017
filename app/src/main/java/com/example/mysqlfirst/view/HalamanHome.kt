@@ -63,8 +63,7 @@ fun HomeScreen(
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     Scaffold(
-        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection
-        ),
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             SiswaTopAppBar(
                 title = stringResource(DestinasiHome.titleRes),
@@ -113,8 +112,7 @@ fun HomeBody(
         when(statusUiSiswa){
             is StatusUiSiswa.Loading -> LoadingScreen()
             //edit 2.5 : tambahkan event onSiswaClick
-            is StatusUiSiswa.Success -> DaftarSiswa(itemSiswa = statusUiSiswa
-                .siswa,
+            is StatusUiSiswa.Success -> DaftarSiswa(itemSiswa = statusUiSiswa.siswa,
                 onSiswaClick = {onSiswaClick(it.id)} )
             is StatusUiSiswa.Error -> ErrorScreen(
                 retryAction,
@@ -126,13 +124,11 @@ fun HomeBody(
 
 @Composable
 fun LoadingScreen(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        CircularProgressIndicator(modifier = Modifier.size(50.dp))
-    }
+    Image(
+        modifier = modifier.size(200.dp),
+        painter = painterResource(R.drawable.loading_img),
+        contentDescription = stringResource(R.string.loading)
+    )
 }
 
 @Composable
@@ -142,8 +138,7 @@ fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = stringResource(R.string.gagal), modifier = Modifier
-            .padding(16.dp))
+        Text(text = stringResource(R.string.gagal), modifier = Modifier.padding(16.dp))
         Button(onClick = retryAction) {
             Text(stringResource(R.string.retry))
         }
