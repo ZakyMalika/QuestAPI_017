@@ -11,16 +11,15 @@ import com.example.mysqlfirst.modeldata.UIStateSiswa
 import com.example.mysqlfirst.modeldata.toDataSiswa
 import com.example.mysqlfirst.modeldata.toUiStateSiswa
 import com.example.mysqlfirst.repositori.RepositoryDataSiswa
-import com.example.mysqlfirst.uicontroller.route.DestinasiDetail
+import com.example.mysqlfirst.uicontroller.route.DestinasiEdit
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class EditViewModel(savedStateHandle: SavedStateHandle, private val repositoryDataSiswa:
 RepositoryDataSiswa): ViewModel() {
     var uiStateSiswa by mutableStateOf(UIStateSiswa())
         private set
 
-    private val idSiswa: Int = checkNotNull(savedStateHandle[DestinasiDetail.itemIdArg])
+    private val idSiswa: Int = checkNotNull(savedStateHandle[DestinasiEdit.itemIdArg])
     init {
         viewModelScope.launch {
             uiStateSiswa = repositoryDataSiswa.getSatuSiswa(idSiswa)
@@ -38,14 +37,7 @@ RepositoryDataSiswa): ViewModel() {
     }
     suspend fun editSatuSiswa(){
         if (validasiInput(uiStateSiswa.detailSiswa)){
-            val call: Response<Void> = repositoryDataSiswa.editSatuSiswa(idSiswa,uiStateSiswa
-                .detailSiswa.toDataSiswa())
-
-            if (call.isSuccessful) {
-                println("Update Sukses : ${call.message()}")
-            } else{
-                println("Update Error : ${call.errorBody()}")
-            }
+            repositoryDataSiswa.editSatuSiswa(idSiswa,uiStateSiswa.detailSiswa.toDataSiswa())
         }
     }
 }
