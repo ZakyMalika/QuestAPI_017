@@ -2,29 +2,33 @@ package com.example.mysqlfirst.viewmodel.provider
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.mysqlfirst.repositori.AplikasiDataSiswa
+import com.example.mysqlfirst.viewmodel.DetailViewModel
+import com.example.mysqlfirst.viewmodel.EditViewModel
 import com.example.mysqlfirst.viewmodel.EntryViewModel
 import com.example.mysqlfirst.viewmodel.HomeViewModel
 
 fun CreationExtras.aplikasiDataSiswa(): AplikasiDataSiswa = (
-        this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]as
-                AplikasiDataSiswa
+        this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as AplikasiDataSiswa
         )
 object PenyediaViewModel {
     val Factory = viewModelFactory {
+        initializer { HomeViewModel(aplikasiDataSiswa().container.repositoryDataSiswa) }
+        initializer { EntryViewModel(aplikasiDataSiswa().container.repositoryDataSiswa) }
         initializer {
-            HomeViewModel(
-                aplikasiDataSiswa().container
-                    .repositoryDataSiswa
+            DetailViewModel(
+                this.createSavedStateHandle(),
+                aplikasiDataSiswa().container.repositoryDataSiswa
             )
         }
         initializer {
-            EntryViewModel(
-                aplikasiDataSiswa().container
-                    .repositoryDataSiswa
+            EditViewModel(
+                this.createSavedStateHandle(),
+                aplikasiDataSiswa().container.repositoryDataSiswa
             )
         }
     }
